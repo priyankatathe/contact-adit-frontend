@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import axios from "axios"
-
+import { MdArrowForwardIos } from "react-icons/md";
 // ================= ASSETS =================
-import logo from "../public/logo.png"
+import logo from "../public/logo2.png"
 import desktopVideo from "../public/videos/hero-desktop.mp4"
 import mobileVideo from "../public/videos/hero-mobile.mp4"
 
@@ -68,9 +68,9 @@ export default function App() {
     <div className="w-full">
 
       {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-white">
+      <header className=" top-0 z-50 bg-black">
         <div className="h-20 flex items-center justify-center">
-          <img src={logo} alt="Logo" className="h-16 md:h-20" />
+          <img src={logo} alt="Logo" className="h-20 md:h-20" />
         </div>
       </header>
 
@@ -188,10 +188,10 @@ export default function App() {
 
 
         <button
-          className="text-lg md:hidden mt-0 font-medium"
+          className="text-lg md:hidden mt-0 font-medium flex items-center gap-2"
           style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.2em" }}
         >
-          Enter The Circle
+          Enter The Circle <MdArrowForwardIos />
         </button>
 
         {/* COUNTDOWN */}
@@ -214,7 +214,7 @@ export default function App() {
         {/* SOCIAL ICONS */}
         <div className="mt-16 flex gap-6">
           <h1
-            className=" text-xs font-extralight md:text-base"
+            className=" text-xs underline font-extralight md:text-base"
 
             style={{
               fontFamily: "'Poppins', sans-serif",
