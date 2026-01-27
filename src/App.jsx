@@ -68,9 +68,9 @@ export default function App() {
     <div className="w-full">
 
       {/* HEADER */}
-      <header className=" top-0 z-50">
-        <div className="h-20 flex items-center justify-center">
-          <img src={logo} alt="Logo" className="h-20 md:h-20" />
+      <header className="absolute top-0 left-0 w-full z-50">
+        <div className="h-20 flex items-center justify-center px-4">
+          <img src={logo} alt="Logo" className="h-16 md:h-20" />
         </div>
       </header>
 
@@ -78,9 +78,16 @@ export default function App() {
       <section className="relative h-screen w-full overflow-hidden">
 
         {/* DESKTOP VIDEO */}
-        <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover hidden md:block">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover hidden md:block"
+        >
           <source src={desktopVideo} type="video/mp4" />
         </video>
+
 
         {/* DESKTOP OVERLAY */}
         <div className="hidden md:block absolute inset-0 bg-black/50"></div>
