@@ -83,7 +83,7 @@ export default function App() {
         </video>
 
         {/* DESKTOP OVERLAY */}
-        <div className="hidden md:block absolute inset-0 bg-black/70"></div>
+        <div className="hidden md:block absolute inset-0 bg-black/50"></div>
 
         {/* MOBILE VIDEO */}
         <video ref={videoRef} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover md:hidden">
@@ -162,10 +162,10 @@ export default function App() {
             bg-gray-50
             px-4 py-3
             text-center
-            text-sm
+            text-base        
             text-black
             placeholder:text-gray-600
-            placeholder:text-sm
+            placeholder:text-base        
             placeholder:italic
             outline-none
             font-normal
