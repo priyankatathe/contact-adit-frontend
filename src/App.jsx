@@ -122,7 +122,7 @@ export default function App() {
       </section>
 
       {/* CONTENT SECTION */}
-      <section className="bg-white text-black flex flex-col items-center text-center px-4 pt-24 pb-10">
+      <section className="bg-white text-black flex flex-col items-center text-center px-4 pt-16 lg:pt-24 pb-10">
 
         {/* MAIN TITLE */}
         <h1
