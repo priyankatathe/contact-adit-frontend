@@ -214,7 +214,7 @@ export default function App() {
         {/* SOCIAL ICONS */}
         <div className="mt-16 flex gap-6">
           <h1
-            className=" text-sm font-extralight md:text-base"
+            className=" text-xs font-extralight md:text-base"
 
             style={{
               fontFamily: "'Poppins', sans-serif",
