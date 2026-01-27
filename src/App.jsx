@@ -179,19 +179,21 @@ export default function App() {
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="text-xl relative overflow-hidden hidden md:inline-block group"
+          className="hidden md:inline-flex items-center gap-2 text-xl relative overflow-hidden group"
           style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.2em" }}
         >
           {loading ? "Please Wait..." : "Enter The Circle"}
+          <MdArrowForwardIos className="h-4 w-4" />
           <span className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-black transition-all duration-500 group-hover:left-0 group-hover:w-full"></span>
         </button>
+
 
 
         <button
           className="text-lg md:hidden mt-0 font-medium flex items-center gap-2"
           style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.2em" }}
         >
-          Enter The Circle <MdArrowForwardIos />
+          Enter The Circle <MdArrowForwardIos className="h-3" />
         </button>
 
         {/* COUNTDOWN */}
@@ -214,7 +216,7 @@ export default function App() {
         {/* SOCIAL ICONS */}
         <div className="mt-16 flex gap-6">
           <h1
-            className=" text-xs underline font-extralight md:text-base"
+            className=" text-xs underline underline-offset-8 font-extralight md:text-base"
 
             style={{
               fontFamily: "'Poppins', sans-serif",
