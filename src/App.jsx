@@ -165,7 +165,7 @@ export default function App() {
             text-base        
             text-black
             placeholder:text-gray-600
-            placeholder:text-base        
+            placeholder:text-sm         
             placeholder:italic
             outline-none
             font-normal
