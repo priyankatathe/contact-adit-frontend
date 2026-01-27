@@ -213,9 +213,17 @@ export default function App() {
 
         {/* SOCIAL ICONS */}
         <div className="mt-14 flex gap-6">
-          <img src={"/icons/tiktok.svg"} className="w-6" />
+          <h1
+            className="mt-14 text-sm font-extralight md:text-base"
+
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              letterSpacing: "0.2em",
+            }}
+          >JOIN US ON INSTAGRAM</h1>
+          {/* <img src={"/icons/tiktok.svg"} className="w-6" />
           <img src={"/icons/facebook.svg"} className="w-7" />
-          <img src={"/icons/instagram.svg"} className="w-8" />
+          <img src={"/icons/instagram.svg"} className="w-8" /> */}
         </div>
 
         {/* COPYRIGHT */}
