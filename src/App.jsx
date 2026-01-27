@@ -68,7 +68,7 @@ export default function App() {
     <div className="w-full">
 
       {/* HEADER */}
-      <header className=" top-0 z-50 bg-black">
+      <header className=" top-0 z-50">
         <div className="h-20 flex items-center justify-center">
           <img src={logo} alt="Logo" className="h-20 md:h-20" />
         </div>
@@ -220,7 +220,7 @@ export default function App() {
               fontFamily: "'Poppins', sans-serif",
               letterSpacing: "0.2em",
             }}
-          >JOIN US ON INSTAGRAM</h1>
+          >JOIN US ON INSTAGRAM </h1>
           {/* <img src={"/icons/tiktok.svg"} className="w-6" />
           <img src={"/icons/facebook.svg"} className="w-7" />
           <img src={"/icons/instagram.svg"} className="w-8" /> */}
