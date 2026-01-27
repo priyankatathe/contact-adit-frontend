@@ -68,9 +68,9 @@ export default function App() {
     <div className="w-full">
 
       {/* HEADER */}
-      <header className="absolute top-0 left-0 w-full z-50">
-        <div className="h-20 flex items-center justify-center px-4">
-          <img src={logo} alt="Logo" className="h-16 md:h-20" />
+      <header className="absolute top-0 left-0  w-full z-50">
+        <div className="h-20 flex mt-5 items-center justify-center px-4">
+          <img src={logo} alt="Logo" className="h-24 md:h-28" />
         </div>
       </header>
 
