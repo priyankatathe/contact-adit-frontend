@@ -143,7 +143,7 @@ export default function App() {
             tracking-[0.3em]
             text-lg md:text-5xl
             font-medium md:font-thin
-            mb-6
+            // mb-6
           "
           style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.2em" }}
         >
@@ -212,9 +212,9 @@ export default function App() {
         </div>
 
         {/* SOCIAL ICONS */}
-        <div className="mt-14 flex gap-6">
+        <div className="mt-16 flex gap-6">
           <h1
-            className="mt-14 text-sm font-extralight md:text-base"
+            className=" text-sm font-extralight md:text-base"
 
             style={{
               fontFamily: "'Poppins', sans-serif",
