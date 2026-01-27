@@ -30,9 +30,10 @@ export default function App() {
       setLoading(true)
 
       const res = await axios.post(
-        "https://email-backend-ozte.onrender.com/api/contact/contact-add",
+        "http://localhost:5000/api/contact/contact-add",
         { email }
       )
+
 
       alert("Thank you for joining the circle ✨")
       setEmail("")
@@ -121,7 +122,7 @@ export default function App() {
       </section>
 
       {/* CONTENT SECTION */}
-      <section className="bg-white text-black flex flex-col items-center text-center px-4 pt-20 pb-12">
+      <section className="bg-white text-black flex flex-col items-center text-center px-4 pt-24 pb-10">
 
         {/* MAIN TITLE */}
         <h1
@@ -219,7 +220,7 @@ export default function App() {
 
         {/* COPYRIGHT */}
         <p
-          className="mt-2 text-[10px]"
+          className="mt-5 text-[10px]"
           style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: "0.1em" }}
         >
           ©2026 All Copyrights Reserved
