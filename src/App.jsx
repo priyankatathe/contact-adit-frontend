@@ -2,13 +2,9 @@ import { useEffect, useRef, useState } from "react"
 import axios from "axios"
 
 // ================= ASSETS =================
-import logo from "./assets/logo.png"
-import desktopVideo from "./assets/videos/hero-desktop.mp4"
-import mobileVideo from "./assets/videos/hero-mobile.mp4"
-
-import tiktok from "./assets/icons/tiktok.svg"
-import facebook from "./assets/icons/facebook.svg"
-import instagram from "./assets/icons/instagram.svg"  
+import logo from "../public/logo.png"
+import desktopVideo from "../public/videos/hero-desktop.mp4"
+import mobileVideo from "../public/videos/hero-mobile.mp4"
 
 export default function App() {
   const videoRef = useRef(null)
@@ -216,9 +212,9 @@ export default function App() {
 
         {/* SOCIAL ICONS */}
         <div className="mt-14 flex gap-6">
-          <img src={tiktok} className="w-6" />
-          <img src={facebook} className="w-7" />
-          <img src={instagram} className="w-8" />
+          <img src={"/icons/tiktok.svg"} className="w-6" />
+          <img src={"/icons/facebook.svg"} className="w-7" />
+          <img src={"/icons/instagram.svg"} className="w-8" />
         </div>
 
         {/* COPYRIGHT */}
