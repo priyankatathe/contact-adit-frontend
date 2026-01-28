@@ -182,7 +182,7 @@ export default function App() {
 
       {/* CONTENT SECTION */}
       <section
-        className="bg-white h-[100vh]  text-black flex flex-col items-center text-center px-4 pt-16 lg:pt-24 pb-10 relative z-10"
+        className="bg-white h-[100vh] justify-center  text-black flex flex-col items-center text-center px-4 pt-16 lg:pt-24 pb-10 relative z-10"
       >
         <h1
           className="tracking-[0.3em] text-lg md:text-5xl font-medium md:font-light mb-2 md:mb-6"
