@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react"
 import axios from "axios"
-import { MdArrowForwardIos } from "react-icons/md";
+import { MdArrowForwardIos } from "react-icons/md"
 // ================= ASSETS =================
 import logo from "../public/logo2.png"
 import desktopVideo from "../public/videos/hero-desktop.mp4"
 import mobileVideo from "../public/videos/hero-mobile.mp4"
 
 export default function App() {
-  const videoRef = useRef(null)
+  const videoRef = useRef(null) // Ref for mobile video (to toggle mute)
+  const heroRef = useRef(null)  // Ref for hero section (for scroll effects)
+
+  // State for mute toggle, countdown, email input, and loading state
   const [muted, setMuted] = useState(true)
   const [timeLeft, setTimeLeft] = useState({})
   const [email, setEmail] = useState("")
@@ -20,6 +23,7 @@ export default function App() {
     setMuted(videoRef.current.muted)
   }
 
+  // Handle email submission
   const handleSubmit = async () => {
     if (!email) {
       alert("Email required")
@@ -28,13 +32,10 @@ export default function App() {
 
     try {
       setLoading(true)
-
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:5000/api/contact/contact-add",
         { email }
       )
-
-
       alert("Thank you for joining the circle ✨")
       setEmail("")
     } catch (error) {
@@ -45,7 +46,7 @@ export default function App() {
     }
   }
 
-  // ⏳ COUNTDOWN
+  // ⏳ COUNTDOWN TIMER - updates every second
   useEffect(() => {
     const targetDate = new Date("2026-02-22T00:00:00")
 
@@ -64,38 +65,89 @@ export default function App() {
     return () => clearInterval(timer)
   }, [])
 
+  // 🌊 SCROLL EFFECTS - parallax and fade, then hide video wrapper fully after scroll past 100vh
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current) return
+
+      const scrollY = window.scrollY
+      const vh = window.innerHeight
+      const progress = Math.min(scrollY / vh, 1)
+
+      const videoWrapper = heroRef.current.querySelector("#video-wrapper")
+      if (!videoWrapper) return
+
+      if (progress >= 1) {
+        // Hide video wrapper fully
+        videoWrapper.style.display = "none"
+        // Keep hero height fixed to avoid layout jump
+        heroRef.current.style.height = "100vh"
+        // Reset transform and opacity (no fade/translate)
+        heroRef.current.style.transform = "none"
+        heroRef.current.style.opacity = "1"
+      } else {
+        // Show video wrapper and apply parallax + fade effect
+        videoWrapper.style.display = "block"
+        heroRef.current.style.height = "100vh"
+        heroRef.current.style.transform = `translateY(${scrollY * 0.4}px)`
+        heroRef.current.style.opacity = `${1 - progress * 1.2}`
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
     <div className="w-full">
-
       {/* HEADER */}
-      <header className="absolute top-0 left-0  w-full z-50">
+      <header className="absolute top-0 left-0 w-full z-50">
         <div className="h-20 flex mt-5 items-center justify-center px-4">
           <img src={logo} alt="Logo" className="h-24 md:h-28" />
         </div>
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative h-screen w-full overflow-hidden">
+      <section
+        ref={heroRef}
+        className="relative h-screen w-full overflow-hidden will-change-transform"
+      >
+        {/* VIDEO WRAPPER */}
+        <div id="video-wrapper" className="absolute inset-0 w-full h-full">
+          {/* DESKTOP VIDEO */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover hidden md:block"
+          >
+            <source src={desktopVideo} type="video/mp4" />
+          </video>
 
-        {/* DESKTOP VIDEO */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover hidden md:block"
-        >
-          <source src={desktopVideo} type="video/mp4" />
-        </video>
+          {/* DESKTOP WHITE FADE-UP OVERLAY */}
+          {/* 
+            To increase the white fade-up over video, adjust the height and opacity here.
+            I set opacity to 0.4 and height to 60% to create stronger fade.
+            You can tweak bg-white/40 (40% opacity) and h-[60%] as you like.
+          */}
+          <div className="hidden md:block absolute bottom-0 left-0 w-full h-[60%] pointer-events-none"></div>
 
+          {/* DESKTOP OVERLAY */}
+          <div className="hidden md:block absolute inset-0 bg-black/50"></div>
 
-        {/* DESKTOP OVERLAY */}
-        <div className="hidden md:block absolute inset-0 bg-black/50"></div>
-
-        {/* MOBILE VIDEO */}
-        <video ref={videoRef} autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover md:hidden">
-          <source src={mobileVideo} type="video/mp4" />
-        </video>
+          {/* MOBILE VIDEO */}
+          <video
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover md:hidden"
+          >
+            <source src={mobileVideo} type="video/mp4" />
+          </video>
+        </div>
 
         {/* SOUND (MOBILE) */}
         <div
@@ -129,58 +181,36 @@ export default function App() {
       </section>
 
       {/* CONTENT SECTION */}
-      <section className="bg-white text-black flex flex-col items-center text-center px-4 pt-16 lg:pt-24 pb-10">
-
-        {/* MAIN TITLE */}
+      <section
+        className="bg-white text-black flex flex-col items-center text-center px-4 pt-16 lg:pt-24 pb-10 relative z-10"
+      >
         <h1
-          className="
-            tracking-[0.3em]
-            text-lg md:text-5xl
-            font-medium md:font-light
-            mb-2 md:mb-6
-          "
+          className="tracking-[0.3em] text-lg md:text-5xl font-medium md:font-light mb-2 md:mb-6"
           style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.2em" }}
         >
           AN OLFACTIVE JOURNEY
         </h1>
 
-        {/* SUBTITLE */}
         <h2
-          className="
-            tracking-[0.3em]
-            text-lg md:text-5xl
-            font-medium md:font-thin
-            // mb-6
-          "
+          className="tracking-[0.3em] text-lg md:text-5xl font-medium md:font-thin"
           style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.2em" }}
         >
           UNFOLDS WITHIN
         </h2>
 
-        {/* EMAIL INPUT */}
+        {/* 
+          To add space above the email field:
+          Add margin-top (e.g., mt-16) here on the input or a wrapper div
+        */}
         <input
           type="email"
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="
-            mt-10
-            w-[70%] md:w-[420px]
-            bg-gray-50
-            px-4 py-3
-            text-center
-            text-base        
-            text-black
-            placeholder:text-gray-600
-            placeholder:text-sm         
-            placeholder:italic
-            outline-none
-            font-normal
-          "
+          className="mt-16 w-[70%] md:w-[420px] bg-gray-50 px-4 py-3 text-center text-base text-black placeholder:text-gray-600 placeholder:text-sm placeholder:italic outline-none font-normal"
           style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: "0.1em" }}
         />
 
-        {/* BUTTONS */}
         <div className="mt-5"></div>
 
         <button
@@ -194,8 +224,6 @@ export default function App() {
           <span className="absolute left-1/2 bottom-0 h-[2px] w-0 bg-black transition-all duration-500 group-hover:left-0 group-hover:w-full"></span>
         </button>
 
-
-
         <button
           className="text-lg md:hidden mt-0 font-medium flex items-center gap-2"
           style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.2em" }}
@@ -203,13 +231,9 @@ export default function App() {
           Enter The Circle <MdArrowForwardIos className="h-3" />
         </button>
 
-        {/* COUNTDOWN */}
         <p
           className="mt-14 text-sm font-extralight md:text-base"
-          style={{
-            fontFamily: "'Poppins', sans-serif",
-            letterSpacing: "0.2em",
-          }}
+          style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: "0.2em" }}
         >
           Unveiling In
         </p>
@@ -220,22 +244,19 @@ export default function App() {
           <TimeBox value={timeLeft.minutes} label="Mins" />
         </div>
 
-        {/* SOCIAL ICONS */}
         <div className="mt-16 flex gap-6">
-          <h1
-            className=" text-xs underline underline-offset-8 font-extralight md:text-base"
-
-            style={{
-              fontFamily: "'Poppins', sans-serif",
-              letterSpacing: "0.2em",
-            }}
-          >JOIN US ON INSTAGRAM </h1>
-          {/* <img src={"/icons/tiktok.svg"} className="w-6" />
-          <img src={"/icons/facebook.svg"} className="w-7" />
-          <img src={"/icons/instagram.svg"} className="w-8" /> */}
+          <a
+            href="https://www.instagram.com/maisonaditi/" // <-- Replace with your Instagram URL
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs underline underline-offset-8 font-extralight md:text-base"
+            style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: "0.2em" }}
+          >
+            JOIN US ON INSTAGRAM
+          </a>
         </div>
 
-        {/* COPYRIGHT */}
+
         <p
           className="mt-5 text-[10px]"
           style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: "0.1em" }}
