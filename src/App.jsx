@@ -67,6 +67,9 @@ export default function App() {
 
   // 🌊 SCROLL EFFECTS - parallax and fade, then hide video wrapper fully after scroll past 100vh
   useEffect(() => {
+    // फक्त डेस्कटॉपसाठी effect चालवा (768px पेक्षा मोठ्या स्क्रीनवर)
+    if (window.innerWidth < 768) return
+
     const handleScroll = () => {
       if (!heroRef.current) return
 
@@ -78,15 +81,13 @@ export default function App() {
       if (!videoWrapper) return
 
       if (progress >= 1) {
-        // Hide video wrapper fully
+        // Scroll पूर्ण झाल्यावर व्हिडिओ लपवा
         videoWrapper.style.display = "none"
-        // Keep hero height fixed to avoid layout jump
         heroRef.current.style.height = "100vh"
-        // Reset transform and opacity (no fade/translate)
         heroRef.current.style.transform = "none"
         heroRef.current.style.opacity = "1"
       } else {
-        // Show video wrapper and apply parallax + fade effect
+        // Scroll दरम्यान fade आणि translate
         videoWrapper.style.display = "block"
         heroRef.current.style.height = "100vh"
         heroRef.current.style.transform = `translateY(${scrollY * 0.4}px)`
@@ -97,6 +98,7 @@ export default function App() {
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
 
   return (
     <div className="w-full">
@@ -127,10 +129,10 @@ export default function App() {
 
           {/* DESKTOP WHITE FADE-UP OVERLAY */}
           {/* 
-            To increase the white fade-up over video, adjust the height and opacity here.
-            I set opacity to 0.4 and height to 60% to create stronger fade.
-            You can tweak bg-white/40 (40% opacity) and h-[60%] as you like.
-          */}
+              To increase the white fade-up over video, adjust the height and opacity here.
+              I set opacity to 0.4 and height to 60% to create stronger fade.
+              You can tweak bg-white/40 (40% opacity) and h-[60%] as you like.
+            */}
           <div className="hidden md:block absolute bottom-0 left-0 w-full h-[60%] pointer-events-none"></div>
 
           {/* DESKTOP OVERLAY */}
@@ -199,9 +201,9 @@ export default function App() {
         </h2>
 
         {/* 
-          To add space above the email field:
-          Add margin-top (e.g., mt-16) here on the input or a wrapper div
-        */}
+            To add space above the email field:
+            Add margin-top (e.g., mt-16) here on the input or a wrapper div
+          */}
         <input
           type="email"
           placeholder="Email Address"
