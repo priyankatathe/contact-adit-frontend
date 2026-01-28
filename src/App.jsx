@@ -99,7 +99,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="w-full">
+    <div className="">
       {/* HEADER */}
       <header className="absolute top-0 left-0 w-full z-50">
         <div className="h-20 flex mt-5 items-center justify-center px-4">
@@ -182,7 +182,7 @@ export default function App() {
 
       {/* CONTENT SECTION */}
       <section
-        className="bg-white text-black flex flex-col items-center text-center px-4 pt-16 lg:pt-24 pb-10 relative z-10"
+        className="bg-white h-[100vh]  text-black flex flex-col items-center text-center px-4 pt-16 lg:pt-24 pb-10 relative z-10"
       >
         <h1
           className="tracking-[0.3em] text-lg md:text-5xl font-medium md:font-light mb-2 md:mb-6"
@@ -245,16 +245,16 @@ export default function App() {
         </div>
 
         <div className="mt-16 flex gap-6">
-  <a
-    href="https://www.instagram.com/maisonaditi/" // <-- Replace with your Instagram URL
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-xs underline underline-offset-8 font-extralight md:text-base"
-    style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: "0.2em" }}
-  >
-    JOIN US ON INSTAGRAM
-  </a>
-</div>
+          <a
+            href="https://www.instagram.com/maisonaditi/" // <-- Replace with your Instagram URL
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs underline underline-offset-8 font-extralight md:text-base"
+            style={{ fontFamily: "'Poppins', sans-serif", letterSpacing: "0.2em" }}
+          >
+            JOIN US ON INSTAGRAM
+          </a>
+        </div>
 
 
         <p
